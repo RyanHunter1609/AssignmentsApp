@@ -15,7 +15,7 @@ public class Main {
         String tomorrowDate = tomorrowDate();
         System.out.println("Tomorrow's Date: " + tomorrowDate);
 
-        //TODO Add 5 weeks to today's LocalDateTime.
+        //Add 5 weeks to today's LocalDateTime.
         LocalDateTime weeksAdded = weeksAddedToCurrent(currentDate);
         System.out.println("Five Weeks From " + currentDate + ":\t" + weeksAdded);
 
