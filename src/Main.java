@@ -1,4 +1,6 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Main {
 
@@ -8,9 +10,12 @@ public class Main {
         // Output the current date-time.
         LocalDateTime currentDate = currentDateTime();
         System.out.println("Current Date and Time: " + currentDate);
-        //TODO Output tomorrow's date using a formatter.
+        // Output tomorrow's date using a formatter.
+        String tomorrowDate = tomorrowDate();
+        System.out.println("Tomorrow's Date: " + tomorrowDate);
+
         //TODO Add 5 weeks to today's LocalDateTime.
-        //TODO Initialize a LocalDateTime object to your birthdate and the time 12:35 PM.
+        //TODO Initialize a LocalDateTime object to your birth date and the time 12:35 PM.
         //TODO Output the day of the week (Sunday-Saturday) that you were born.
         //TODO Output the number of days you've been alive.
         //TODO Output the number of days between two dates.
@@ -30,6 +35,12 @@ public class Main {
         //TODO
 
 
+    }
+
+    private static String tomorrowDate() {
+        LocalDateTime today = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy-MM-dd HH:mm:ss");
+        return today.plusDays(1).format(formatter);
     }
 
     private static LocalDateTime currentDateTime() {
