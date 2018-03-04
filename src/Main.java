@@ -1,3 +1,4 @@
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -21,9 +22,13 @@ public class Main {
         System.out.println("Five Weeks From " + currentDate + ":\t" + weeksAdded);
 
         // Initialize a LocalDateTime object to your birth date and the time 12:35 PM.
-        LocalDateTime bDate = birthDateTime(currentDate);
+        LocalDateTime bDate = birthDateTime();
         System.out.println("Birth Date and Time: " + bDate);
-        //TODO Output the day of the week (Sunday-Saturday) that you were born.
+
+        // Output the day of the week (Sunday-Saturday) that you were born.
+        DayOfWeek bday = birthday();
+        System.out.println("BirthDay Day: " + bday);
+
         //TODO Output the number of days you've been alive.
         //TODO Output the number of days between two dates.
         //TODO
@@ -44,10 +49,16 @@ public class Main {
 
     }
 
-    private static LocalDateTime birthDateTime(LocalDateTime currentDate) {
-         currentDate = LocalDateTime.of(1997, Month.SEPTEMBER, 16, 12, 35);
+    private static DayOfWeek birthday() {
 
-        return currentDate;
+        return LocalDateTime.of(1997, Month.SEPTEMBER, 16, 12, 35).getDayOfWeek()
+        ;
+    }
+
+    private static LocalDateTime birthDateTime() {
+
+        return LocalDateTime.of(1997, Month.SEPTEMBER, 16, 12, 35);
+
     }
 
     private static LocalDateTime weeksAddedToCurrent(LocalDateTime currentDate) {
