@@ -42,8 +42,10 @@ public class Main {
         System.out.println("There are " + daysBetween + " days between " + date1 + " and " + date2);
 
 
-        //TODO Given two dates, output the earlier..
-        LocalDate earlyDate = earlierDate(date1, date2);
+        //Given two dates, output the earlier..
+        boolean earlyDate = earlierDate(date1, date2);
+        System.out.println("Is " + date1 + " Earlier Than " + date2 + "? " + earlyDate);
+
         //TODO Create a file with 100 random "month/day/year  hour:minutes" (in that format) on each line.
         //TODO Store data from the file into an ArrayList of LocalDateTime objects.
         //TODO Output the number of stored dates in the year [Y].
@@ -61,12 +63,15 @@ public class Main {
 
     }
 
-    private static LocalDate earlierDate(LocalDate date1, LocalDate date2) {
-        date1.compareTo(date2);
-        date1.isBefore(date2);
-        date2.isAfter(date1);
+    private static boolean earlierDate(LocalDate date1, LocalDate date2) {
+        if (date1 == date2) {
+            return false;
+        }
+        if (date1.isBefore(date2)) {
+            return true;
+        }
 
-        return null;
+        return true;
     }
 
     private static long numOfDaysBetween(LocalDate date1, LocalDate date2) {
