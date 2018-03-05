@@ -43,25 +43,30 @@ public class Main {
 
 
         //TODO Given two dates, output the earlier..
-        //        System.out.println("Enter Two Dates to Find the Number of Days Between!");
-//        System.out.println("Enter First Date: ");
-//
-//        System.out.println("Enter Second Date: ");
-        //TODO
-        //TODO
-        //TODO
-        //TODO
-        //TODO
-        //TODO
-        //TODO
-        //TODO
-        //TODO
-        //TODO
-        //TODO
-        //TODO
-        //TODO
+        LocalDate earlyDate = earlierDate(date1, date2);
+        //TODO Create a file with 100 random "month/day/year  hour:minutes" (in that format) on each line.
+        //TODO Store data from the file into an ArrayList of LocalDateTime objects.
+        //TODO Output the number of stored dates in the year [Y].
+        //TODO Count the number of stored dates in the current year.
+        //TODO Count the number of duplicates.
+        //TODO Sort the dates in chronological order.
+        //TODO Count the number of duplicates in a sorted list without using a Java Set.
+        //TODO Count the number of evening (after 6pm) dates.
+        //TODO Count the number of dates in each of the individual 12 months without using a Java Map.
+        //TODO Count the number of dates in each of the individual 12 months using a Java Map.
+        //TODO Determine the index of the latest LocalDateTime.
+        //TODO Determine the indexes of the elements that have the earliest starting time, regardless of date.
+        //TODO Output a date in the format "January 1st, 2018".
 
 
+    }
+
+    private static LocalDate earlierDate(LocalDate date1, LocalDate date2) {
+        date1.compareTo(date2);
+        date1.isBefore(date2);
+        date2.isAfter(date1);
+
+        return null;
     }
 
     private static long numOfDaysBetween(LocalDate date1, LocalDate date2) {
