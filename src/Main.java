@@ -3,8 +3,10 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
 
 public class Main {
+    Scanner reader = new Scanner(System.in);
 
     public static void main(String[] args) {
         System.out.println("\n\nHello, AssignmentsApp!\n");
@@ -33,8 +35,18 @@ public class Main {
         long daysLived = howManyDaysLived();
         System.out.println("Days Lived So Far... " + daysLived + "Days.");
 
-        //TODO Output the number of days between two dates.
+        // Output the number of days between two dates.
+        LocalDate date1 = LocalDate.of(2018, Month.MAY, 26);
+        LocalDate date2 = LocalDate.of(2018, Month.JUNE, 1);
+        long daysBetween = numOfDaysBetween(date1, date2);
+        System.out.println("There are " + daysBetween + " days between " + date1 + " and " + date2);
+
+
         //TODO Given two dates, output the earlier..
+        //        System.out.println("Enter Two Dates to Find the Number of Days Between!");
+//        System.out.println("Enter First Date: ");
+//
+//        System.out.println("Enter Second Date: ");
         //TODO
         //TODO
         //TODO
@@ -50,6 +62,13 @@ public class Main {
         //TODO
 
 
+    }
+
+    private static long numOfDaysBetween(LocalDate date1, LocalDate date2) {
+        long d1 = date1.toEpochDay();
+        long d2 = date2.toEpochDay();
+
+        return d2 - d1;
     }
 
     private static long howManyDaysLived() {
