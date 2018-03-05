@@ -29,9 +29,12 @@ public class Main {
         DayOfWeek bday = birthday();
         System.out.println("BirthDay Day: " + bday);
 
-        //TODO Output the number of days you've been alive.
+        // Output the number of days you've been alive.
+        long daysLived = howManyDaysLived();
+        System.out.println("Days Lived So Far... " + daysLived + "Days.");
+
         //TODO Output the number of days between two dates.
-        //TODO
+        //TODO Given two dates, output the earlier..
         //TODO
         //TODO
         //TODO
@@ -48,6 +51,14 @@ public class Main {
 
 
     }
+
+    private static long howManyDaysLived() {
+        long date = LocalDate.now().toEpochDay();
+        long bday = LocalDate.of(1997, Month.SEPTEMBER, 16).toEpochDay();
+
+        return date - bday;
+    }
+
 
     private static DayOfWeek birthday() {
 
