@@ -1,8 +1,13 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -47,6 +52,9 @@ public class Main {
         System.out.println("Is " + date1 + " Earlier Than " + date2 + "? " + earlyDate);
 
         //TODO Create a file with 100 random "month/day/year  hour:minutes" (in that format) on each line.
+        fileWithRandomDateTime();
+
+
         //TODO Store data from the file into an ArrayList of LocalDateTime objects.
         //TODO Output the number of stored dates in the year [Y].
         //TODO Count the number of stored dates in the current year.
@@ -63,6 +71,19 @@ public class Main {
 
     }
 
+    private static void fileWithRandomDateTime() {
+        Random random = new Random();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy/MM/dd  HH:mm");
+        try {
+            PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("randomDateTime.txt", true)));
+            out.println("the text");
+            out.close();
+        } catch (IOException e) {
+            //exception handling left as an exercise for the reader
+        }
+
+    }
+
     private static boolean earlierDate(LocalDate date1, LocalDate date2) {
         if (date1 == date2) {
             return false;
@@ -70,15 +91,22 @@ public class Main {
         if (date1.isBefore(date2)) {
             return true;
         }
-
         return true;
     }
 
     private static long numOfDaysBetween(LocalDate date1, LocalDate date2) {
         long d1 = date1.toEpochDay();
         long d2 = date2.toEpochDay();
+        long daysBetween;
 
-        return d2 - d1;
+        if (date1.isBefore(date2)) {
+            daysBetween = d2 - d1;
+        } else {
+            daysBetween = d1 - d2;
+        }
+
+
+        return daysBetween;
     }
 
     private static long howManyDaysLived() {
@@ -88,11 +116,10 @@ public class Main {
         return date - bday;
     }
 
-
     private static DayOfWeek birthday() {
 
         return LocalDateTime.of(1997, Month.SEPTEMBER, 16, 12, 35).getDayOfWeek()
-        ;
+                ;
     }
 
     private static LocalDateTime birthDateTime() {
