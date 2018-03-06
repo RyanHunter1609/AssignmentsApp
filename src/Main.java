@@ -1,6 +1,6 @@
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class Main {
     Scanner reader = new Scanner(System.in);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         System.out.println("\n\nHello, AssignmentsApp!\n");
 
         // Output the current date-time.
@@ -71,15 +71,31 @@ public class Main {
 
     }
 
-    private static void fileWithRandomDateTime() {
-        Random random = new Random();
+    private static void fileWithRandomDateTime() throws FileNotFoundException {
+        LocalDateTime today = LocalDateTime.now();
+//        Random random = new Random();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy/MM/dd  HH:mm");
-        try {
-            PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("randomDateTime.txt", true)));
-            out.println("the text");
-            out.close();
-        } catch (IOException e) {
-            //exception handling left as an exercise for the reader
+        // write data to a file
+        File outfile = new File("randomdatetime.txt");
+        if (outfile.exists()) {
+            System.out.println("Oh no, you're going to overwrite the data in the file!");
+        } else {
+            try (PrintWriter pw = new PrintWriter(outfile)) {
+                System.out.println("This is being written to stdout.");
+                pw.println(today.format(formatter) + 100);
+            } catch (FileNotFoundException e) {
+            }
+        }
+        // read data from a file
+        File infile = new File("randomdatetime.txt");
+        if (!infile.exists()) {
+            System.out.println("Oh no, you can't read from a file that doesn't exist!");
+        } else {
+            try (Scanner sc = new Scanner(infile)) {
+                while (sc.hasNext()) {
+                    int age = sc.nextInt();
+                }
+            }
         }
 
     }
