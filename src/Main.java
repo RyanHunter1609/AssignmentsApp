@@ -77,26 +77,29 @@ public class Main {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy/MM/dd  HH:mm");
         // write data to a file
         File outfile = new File("randomdatetime.txt");
-        if (outfile.exists()) {
-            System.out.println("Oh no, you're going to overwrite the data in the file!");
-        } else {
-            try (PrintWriter pw = new PrintWriter(outfile)) {
-                System.out.println("This is being written to stdout.");
-                pw.println(today.format(formatter) + 100);
-            } catch (FileNotFoundException e) {
-            }
-        }
-        // read data from a file
-        File infile = new File("randomdatetime.txt");
-        if (!infile.exists()) {
-            System.out.println("Oh no, you can't read from a file that doesn't exist!");
-        } else {
-            try (Scanner sc = new Scanner(infile)) {
-                while (sc.hasNext()) {
-                    int age = sc.nextInt();
+        for (int i = 0; i < 101; i++) {
+            if (outfile.exists()) {
+                System.out.println(today.format(formatter));
+            } else {
+                try (PrintWriter pw = new PrintWriter(outfile)) {
+                    System.out.println("This is being written to stdout.");
+                    pw.println(today.format(formatter));
+                } catch (FileNotFoundException e) {
                 }
             }
         }
+
+//        // read data from a file
+//        File infile = new File("randomdatetime.txt");
+//        if (!infile.exists()) {
+//            System.out.println("Oh no, you can't read from a file that doesn't exist!");
+//        } else {
+//            try (Scanner sc = new Scanner(infile)) {
+//                while (sc.hasNext()) {
+//                    int age = sc.nextInt();
+//                }
+//            }
+//        }
 
     }
 
