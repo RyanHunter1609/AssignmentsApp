@@ -51,7 +51,7 @@ public class Main {
         boolean earlyDate = earlierDate(date1, date2);
         System.out.println("Is " + date1 + " Earlier Than " + date2 + "? " + earlyDate);
 
-        //TODO Create a file with 100 random "month/day/year  hour:minutes" (in that format) on each line.
+        //Create a file with 100 random "month/day/year  hour:minutes" (in that format) on each line.
         fileWithRandomDateTime();
 
 
@@ -71,37 +71,33 @@ public class Main {
 
     }
 
-    private static void fileWithRandomDateTime() throws FileNotFoundException {
-        LocalDateTime today = LocalDateTime.now();
-//        Random random = new Random();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy/MM/dd  HH:mm");
-        // write data to a file
+    private static void fileWithRandomDateTime() {
         File outfile = new File("randomdatetime.txt");
-        for (int i = 0; i < 101; i++) {
-            if (outfile.exists()) {
-                System.out.println(today.format(formatter));
-            } else {
-                try (PrintWriter pw = new PrintWriter(outfile)) {
-                    System.out.println("This is being written to stdout.");
-                    pw.println(today.format(formatter));
-                } catch (FileNotFoundException e) {
-                }
+
+        try (PrintWriter pw = new PrintWriter(outfile)) {
+            Random random = new Random();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy/MM/dd  HH:mm");
+
+            for (int i = 0; i < 100; i++) {
+                LocalDateTime today = LocalDateTime.now();
+                //make new indexes random
+                int randomDateTimeIndex = random.nextInt(101);
+                //add random days to to current date
+                LocalDateTime newRandomDays = today.plusDays(randomDateTimeIndex);
+                //add random hours and minutes to current time
+                LocalDateTime newRandomTimes = today.plusHours(randomDateTimeIndex).plusMinutes(randomDateTimeIndex);
+                //format date and time
+                String formatDate = newRandomDays.format(formatter);
+                String formatTime = newRandomTimes.format(formatter);
+                // write data to a file
+                pw.println(formatDate);
+                pw.println(formatTime);
             }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
-
-//        // read data from a file
-//        File infile = new File("randomdatetime.txt");
-//        if (!infile.exists()) {
-//            System.out.println("Oh no, you can't read from a file that doesn't exist!");
-//        } else {
-//            try (Scanner sc = new Scanner(infile)) {
-//                while (sc.hasNext()) {
-//                    int age = sc.nextInt();
-//                }
-//            }
-//        }
-
     }
+
 
     private static boolean earlierDate(LocalDate date1, LocalDate date2) {
         if (date1 == date2) {
