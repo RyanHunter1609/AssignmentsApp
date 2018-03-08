@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -53,9 +54,11 @@ public class Main {
 
         //Create a file with 100 random "month/day/year  hour:minutes" (in that format) on each line.
         fileWithRandomDateTime();
+        //Store data from the file into an ArrayList of LocalDateTime objects.
+        ArrayList<LocalDateTime> listOfRandomDateTime = readFileWithRandomDateTime();
+        System.out.println("List of Random Dates and Times: " + listOfRandomDateTime);
 
 
-        //TODO Store data from the file into an ArrayList of LocalDateTime objects.
         //TODO Output the number of stored dates in the year [Y].
         //TODO Count the number of stored dates in the current year.
         //TODO Count the number of duplicates.
@@ -71,17 +74,45 @@ public class Main {
 
     }
 
+    private static ArrayList<LocalDateTime> readFileWithRandomDateTime() {
+        //declare arrayList
+        ArrayList<LocalDateTime> arrayListofDateTime = new ArrayList<>();
+        // read data from a file
+        File infile = new File("randomdatetime.txt");
+        if (!infile.exists()) {
+            System.out.println("Oh no, you can't read from a file that doesn't exist!");
+        } else {
+            try (Scanner sc = new Scanner(infile)) {
+                while (sc.hasNext()) {
+                    String localDateTimeString = sc.nextLine();
+                    System.out.println("Hello " + localDateTimeString);
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy/MM/dd  HH:mm");
+                    LocalDateTime localDateTime = LocalDateTime.parse(localDateTimeString, formatter);
+                    arrayListofDateTime.add(localDateTime);
+
+
+                }
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        return arrayListofDateTime;
+    }
+
+
+
+
     private static void fileWithRandomDateTime() {
         File outfile = new File("randomdatetime.txt");
 
         try (PrintWriter pw = new PrintWriter(outfile)) {
             Random random = new Random();
+            LocalDateTime today = LocalDateTime.now();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy/MM/dd  HH:mm");
+            //make new indexes random
+            int randomDateTimeIndex = random.nextInt(101);
 
             for (int i = 0; i < 100; i++) {
-                LocalDateTime today = LocalDateTime.now();
-                //make new indexes random
-                int randomDateTimeIndex = random.nextInt(101);
                 //add random days to to current date
                 LocalDateTime newRandomDays = today.plusDays(randomDateTimeIndex);
                 //add random hours and minutes to current time
