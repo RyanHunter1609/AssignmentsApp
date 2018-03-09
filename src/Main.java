@@ -59,7 +59,12 @@ public class Main {
         System.out.println("List of Random Dates and Times: " + listOfRandomDateTime);
 
 
-        //TODO Output the number of stored dates in the year [Y].
+        //Output the number of stored dates in the year [Y].
+        LocalDateTime currentYear = LocalDateTime.now();
+        int numberOfStoredDates = numberOfStoredDateInYear(listOfRandomDateTime, currentYear);
+
+
+        System.out.println("There are " + numberOfStoredDates + " stored dates in the year " + currentYear.getYear());
         //TODO Count the number of stored dates in the current year.
         //TODO Count the number of duplicates.
         //TODO Sort the dates in chronological order.
@@ -74,6 +79,16 @@ public class Main {
 
     }
 
+    private static int numberOfStoredDateInYear(ArrayList<LocalDateTime> listOfRandomDateTime, LocalDateTime currentYear) {
+        int count = 0;
+        for (int i = 0; i < listOfRandomDateTime.size(); i++) {
+            if (listOfRandomDateTime.get(i).getYear() == currentYear.getYear()) {
+                count += 1;
+            }
+        }
+        return count;
+    }
+
     private static ArrayList<LocalDateTime> readFileWithRandomDateTime() {
         //declare arrayList
         ArrayList<LocalDateTime> arrayListofDateTime = new ArrayList<>();
@@ -85,7 +100,6 @@ public class Main {
             try (Scanner sc = new Scanner(infile)) {
                 while (sc.hasNext()) {
                     String localDateTimeString = sc.nextLine();
-                    System.out.println("Hello " + localDateTimeString);
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy/MM/dd  HH:mm");
                     LocalDateTime localDateTime = LocalDateTime.parse(localDateTimeString, formatter);
                     arrayListofDateTime.add(localDateTime);
@@ -98,9 +112,6 @@ public class Main {
         }
         return arrayListofDateTime;
     }
-
-
-
 
     private static void fileWithRandomDateTime() {
         File outfile = new File("randomdatetime.txt");
@@ -128,7 +139,6 @@ public class Main {
             e.printStackTrace();
         }
     }
-
 
     private static boolean earlierDate(LocalDate date1, LocalDate date2) {
         if (date1 == date2) {
