@@ -62,10 +62,12 @@ public class Main {
         //Output the number of stored dates in the year [Y].
         LocalDateTime currentYear = LocalDateTime.now();
         int numberOfStoredDates = numberOfStoredDateInYear(listOfRandomDateTime, currentYear);
-
-
         System.out.println("There are " + numberOfStoredDates + " stored dates in the year " + currentYear.getYear());
-        //TODO Count the number of stored dates in the current year.
+
+        // Count the number of stored dates in the current year.
+        int countDates = countDatesInCurrentYear(listOfRandomDateTime, currentYear);
+        System.out.println("There are " + countDates + " stored dates in the year " + currentYear.getYear());
+
         //TODO Count the number of duplicates.
         //TODO Sort the dates in chronological order.
         //TODO Count the number of duplicates in a sorted list without using a Java Set.
@@ -79,11 +81,21 @@ public class Main {
 
     }
 
+    private static int countDatesInCurrentYear(ArrayList<LocalDateTime> listOfRandomDateTime, LocalDateTime currentYear) {
+        int count = 0;
+        for (int i = 0; i < listOfRandomDateTime.size(); i++) {
+            if (listOfRandomDateTime.get(i).getYear() == currentYear.getYear()) {
+                count++;
+            }
+        }
+        return count;
+    }
+
     private static int numberOfStoredDateInYear(ArrayList<LocalDateTime> listOfRandomDateTime, LocalDateTime currentYear) {
         int count = 0;
         for (int i = 0; i < listOfRandomDateTime.size(); i++) {
             if (listOfRandomDateTime.get(i).getYear() == currentYear.getYear()) {
-                count += 1;
+                count++;
             }
         }
         return count;
@@ -123,7 +135,7 @@ public class Main {
             //make new indexes random
             int randomDateTimeIndex = random.nextInt(101);
 
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i < 50; i++) {
                 //add random days to to current date
                 LocalDateTime newRandomDays = today.plusDays(randomDateTimeIndex);
                 //add random hours and minutes to current time
