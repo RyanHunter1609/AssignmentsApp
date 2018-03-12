@@ -69,6 +69,7 @@ public class Main {
         System.out.println("There are " + countDates + " stored dates in the year " + currentYear.getYear());
 
         //TODO Count the number of duplicates.
+        int countDuplicates = countDuplicateDateTime(listOfRandomDateTime);
         //TODO Sort the dates in chronological order.
         //TODO Count the number of duplicates in a sorted list without using a Java Set.
         //TODO Count the number of evening (after 6pm) dates.
@@ -79,6 +80,12 @@ public class Main {
         //TODO Output a date in the format "January 1st, 2018".
 
 
+    }
+
+    private static int countDuplicateDateTime(ArrayList<LocalDateTime> listOfRandomDateTime) {
+        int count = 0;
+
+        return 0;
     }
 
     private static int countDatesInCurrentYear(ArrayList<LocalDateTime> listOfRandomDateTime, LocalDateTime currentYear) {
@@ -129,8 +136,11 @@ public class Main {
         File outfile = new File("randomdatetime.txt");
 
         try (PrintWriter pw = new PrintWriter(outfile)) {
+            //initialize random generator
             Random random = new Random();
+            //initialize current local date and time
             LocalDateTime today = LocalDateTime.now();
+            //format date and time
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy/MM/dd  HH:mm");
             //make new indexes random
             int randomDateTimeIndex = random.nextInt(101);
