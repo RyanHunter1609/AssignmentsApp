@@ -143,13 +143,12 @@ public class Main {
             //format date and time
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy/MM/dd  HH:mm");
             //make new indexes random
-            int randomDateTimeIndex = random.nextInt(101);
 
             for (int i = 0; i < 50; i++) {
                 //add random days to to current date
-                LocalDateTime newRandomDays = today.plusDays(randomDateTimeIndex);
+                LocalDateTime newRandomDays = today.plusDays(random.nextInt());
                 //add random hours and minutes to current time
-                LocalDateTime newRandomTimes = today.plusHours(randomDateTimeIndex).plusMinutes(randomDateTimeIndex);
+                LocalDateTime newRandomTimes = today.plusHours(random.nextInt()).plusMinutes(random.nextInt());
                 //format date and time
                 String formatDate = newRandomDays.format(formatter);
                 String formatTime = newRandomTimes.format(formatter);
