@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -68,8 +69,9 @@ public class Main {
         int countDates = countDatesInCurrentYear(listOfRandomDateTime, currentYear);
         System.out.println("There are " + countDates + " stored dates in the year " + currentYear.getYear());
 
-        //TODO Count the number of duplicates.
+        // Count the number of duplicates.
         int countDuplicates = countDuplicateDateTime(listOfRandomDateTime);
+        System.out.println("The Number of Duplicates: " + countDates);
         //TODO Sort the dates in chronological order.
         //TODO Count the number of duplicates in a sorted list without using a Java Set.
         //TODO Count the number of evening (after 6pm) dates.
@@ -83,9 +85,17 @@ public class Main {
     }
 
     private static int countDuplicateDateTime(ArrayList<LocalDateTime> listOfRandomDateTime) {
+        HashSet<LocalDateTime> duplicatesSet = new HashSet<>();
         int count = 0;
+        for (int i = 0; i < listOfRandomDateTime.size(); i++) {
+            if (duplicatesSet.contains(listOfRandomDateTime.get(i))) {
+                count++;
+            } else {
+                duplicatesSet.add(listOfRandomDateTime.get(i));
+            }
+        }
 
-        return 0;
+        return count;
     }
 
     private static int countDatesInCurrentYear(ArrayList<LocalDateTime> listOfRandomDateTime, LocalDateTime currentYear) {
