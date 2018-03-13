@@ -70,13 +70,14 @@ public class Main {
         System.out.println("There are " + countDates + " stored dates in the year " + currentYear.getYear());
 
         // Count the number of duplicates.
-        int countDuplicates = countDuplicateDateTime(listOfRandomDateTime);
-        System.out.println("The Number of Duplicates: " + countDuplicates);
+        int countDuplicates = countDuplicateDateTimeWithSet(listOfRandomDateTime);
 
         // Sort the dates in chronological order.
         sortDatesChronologicalOrder(listOfRandomDateTime);
 
-        //TODO Count the number of duplicates in a sorted list without using a Java Set.
+        // Count the number of duplicates in a sorted list without using a Java Set.
+        countDuplicatesWithoutSet(listOfRandomDateTime);
+
         //TODO Count the number of evening (after 6pm) dates.
         //TODO Count the number of dates in each of the individual 12 months without using a Java Map.
         //TODO Count the number of dates in each of the individual 12 months using a Java Map.
@@ -84,7 +85,19 @@ public class Main {
         //TODO Determine the indexes of the elements that have the earliest starting time, regardless of date.
         //TODO Output a date in the format "January 1st, 2018".
 
+    }
 
+    private static int countDuplicatesWithoutSet(ArrayList<LocalDateTime> listOfRandomDateTime) {
+        int count = 0;
+        ArrayList<LocalDateTime> duplicateArrayList = new ArrayList<>();
+        for (int i = 0; i < listOfRandomDateTime.size(); i++) {
+            if (duplicateArrayList.contains(listOfRandomDateTime.get(i))) {
+                count++;
+            } else {
+                duplicateArrayList.add(listOfRandomDateTime.get(i));
+            }
+        }
+        return count;
     }
 
     private static void sortDatesChronologicalOrder(ArrayList<LocalDateTime> listOfRandomDateTime) {
@@ -99,7 +112,7 @@ public class Main {
         }
     }
 
-    private static int countDuplicateDateTime(ArrayList<LocalDateTime> listOfRandomDateTime) {
+    private static int countDuplicateDateTimeWithSet(ArrayList<LocalDateTime> listOfRandomDateTime) {
         HashSet<LocalDateTime> duplicatesSet = new HashSet<>();
         int count = 0;
         for (int i = 0; i < listOfRandomDateTime.size(); i++) {
