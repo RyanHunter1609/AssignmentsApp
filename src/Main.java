@@ -71,8 +71,11 @@ public class Main {
 
         // Count the number of duplicates.
         int countDuplicates = countDuplicateDateTime(listOfRandomDateTime);
-        System.out.println("The Number of Duplicates: " + countDates);
-        //TODO Sort the dates in chronological order.
+        System.out.println("The Number of Duplicates: " + countDuplicates);
+
+        // Sort the dates in chronological order.
+        sortDatesChronologicalOrder(listOfRandomDateTime);
+
         //TODO Count the number of duplicates in a sorted list without using a Java Set.
         //TODO Count the number of evening (after 6pm) dates.
         //TODO Count the number of dates in each of the individual 12 months without using a Java Map.
@@ -82,6 +85,18 @@ public class Main {
         //TODO Output a date in the format "January 1st, 2018".
 
 
+    }
+
+    private static void sortDatesChronologicalOrder(ArrayList<LocalDateTime> listOfRandomDateTime) {
+        for (int i = 0; i < listOfRandomDateTime.size(); i++) {
+            for (int j = 0; j < listOfRandomDateTime.size(); j++) {
+                if (listOfRandomDateTime.get(j).isAfter(listOfRandomDateTime.get(i))) {
+                    LocalDateTime temp = listOfRandomDateTime.get(j);
+                    listOfRandomDateTime.set(j, listOfRandomDateTime.get(i));
+                    listOfRandomDateTime.set(i, temp);
+                }
+            }
+        }
     }
 
     private static int countDuplicateDateTime(ArrayList<LocalDateTime> listOfRandomDateTime) {
